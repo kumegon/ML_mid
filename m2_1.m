@@ -1,10 +1,9 @@
 A = [3,0.5;0.5,1];
 u = [1;2];
-lambda = 1;
 gamma = 2*norm(A,2);
 eta = 1/gamma;
 w = rand(2,1);
-lambda = 6;
+lambda = 2;
 cnt = 0;
 y = f2_1(lambda,w,u,A);
 prev = 0;
@@ -21,3 +20,4 @@ end
 
 x = 0:1:cnt;
 semilogx(x,y);
+saveas(gcf,['p2_1_l',num2str(lambda),'.png']);

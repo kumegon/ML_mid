@@ -7,7 +7,7 @@ z = diag(y)*x;
 K = z*(z.');
 a = randn(n,1);
 lambda = 0.00003;
-gamma = norm(K,'fro')/(2*lambda);
+gamma = norm(K,2)/(2*lambda);
 eta = 1/gamma;
 
 cnt = 0;
@@ -16,8 +16,7 @@ score = score3_3(lambda,z,w,n);
 d_score = dscore3_3(lambda,a,K,n);
 y_s = score;
 y_ds = d_score;
-eps = 0.1;
-loop = 100000;
+eps = 0.001;
 
 while abs(score-d_score) > eps
   cnt = cnt+1;
@@ -38,7 +37,10 @@ f2 = figure;
 
 figure(f1);
 xs = 0:loop:cnt;
-plot(xs,y_s-y_ds,xs,y_s,xs,y_ds);
+semilogx(xs,y_s-y_ds,xs,y_s,xs,y_ds);
+legend('dual-main','main','dual')
+saveas(gcf,['p3_3.png']);
+
 
 figure(f2);
 xs = linspace(-5,5);
